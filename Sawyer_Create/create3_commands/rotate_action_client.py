@@ -2,17 +2,19 @@ import rclpy
 from rclpy.action import ActionClient
 from rclpy.node import Node
 
-from irobot_create_msgs.action import Undock
+from irobot_create_msgs.action import RotateAngle
 
-
-class UndockingActionClient(Node):
+class RotateActionClient(Node):
 
     def __init__(self):
-        super().__init__('undocking_action_client')
-        self._action_client = ActionClient(self, Undock, 'undock')
+        super().__init__('rotate_action_client')
+        self._action_client = ActionClient(self, RotateAngle, 'rotate_angle')
 
-    def send_goal(self, order):
-        goal_msg = Undock.Goal()
+    def send_goal(self, angle=1.57, max_rotation_speed=0.5):
+        goal_msg = RotateAngle.Goal()
+        goal_msg.angle = angle 
+        goal_msg.max_rotation_speed = max_rotation_speed
+
         self._action_client.wait_for_server()
 
         self._send_goal_future = self._action_client.send_goal_async(goal_msg)
@@ -38,10 +40,12 @@ class UndockingActionClient(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    action_client = UndockingActionClient()
+    action_client = RotateActionClient()
 
-    action_client.send_goal("{}")
+    angle = 1.57
+    speed = 0.5 # Max 1.9
 
+    action_client.send_goal(angle, speed)
     rclpy.spin(action_client)
 
 

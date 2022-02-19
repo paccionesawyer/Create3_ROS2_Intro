@@ -1,20 +1,21 @@
 import rclpy
 from rclpy.action import ActionClient
 from rclpy.node import Node
-
 from irobot_create_msgs.action import DriveDistance
+
 
 class DriveDistanceActionClient(Node):
 
     def __init__(self):
         super().__init__('drive_distance_action_client')
-        self._action_client = ActionClient(self, DriveDistance, 'drive_distance')
+        self._action_client = ActionClient(
+            self, DriveDistance, 'drive_distance')
 
     def send_goal(self, distance=0.5, max_translation_speed=0.15):
-        self._action_client.wait_for_server()
-        
         goal_msg = DriveDistance.Goal()
-        goal_msg.distance = distance 
+        self._action_client.wait_for_server()
+
+        goal_msg.distance = distance
         goal_msg.max_translation_speed = max_translation_speed
 
         self._send_goal_future = self._action_client.send_goal_async(goal_msg)
@@ -35,7 +36,6 @@ class DriveDistanceActionClient(Node):
     def get_result_callback(self, future):
         result = future.result().result
         self.get_logger().info('Result: {0}'.format(result))
-        rclpy.shutdown()
 
 
 def main(args=None):
@@ -44,7 +44,7 @@ def main(args=None):
     action_client = DriveDistanceActionClient()
 
     dist = 0.5
-    speed = 0.15 
+    speed = 0.15
 
     action_client.send_goal(dist, speed)
     rclpy.spin(action_client)

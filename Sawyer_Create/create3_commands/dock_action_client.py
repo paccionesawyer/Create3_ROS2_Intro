@@ -33,7 +33,6 @@ class DockServoActionClient(Node):
     def get_result_callback(self, future):
         result = future.result().result
         self.get_logger().info('Result: {0}'.format(result))
-        rclpy.shutdown()
 
 
 def main(args=None):
