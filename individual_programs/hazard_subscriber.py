@@ -4,7 +4,6 @@ from rclpy.qos import qos_profile_sensor_data
 from irobot_create_msgs.msg import HazardDetectionVector
 
 class HazardSubscriber(Node):
-
     def __init__(self):
         super().__init__('hazard_subscriber')
         self.subscription = self.create_subscription(
