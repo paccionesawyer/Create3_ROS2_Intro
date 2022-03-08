@@ -108,14 +108,14 @@ Clone this Github Repository onto your Pi.
 git clone https://github.com/paccionesawyer/Create3_Python.git
 ```
 
-If created a boiler plate file for coding with this library. Edit it with your preferred text editor. For example, nano.
+I've created a boiler plate file for coding with this library. Edit it with your preferred text editor. For example, nano.
 
 ```
 cd Create3_Python
 nano Example_File.py
 ```
 
-Start Coding! The ReadMe for this class can be found here!
+Start Coding! All the function descriptions can be found in the class definition.
 
 ## Section 5 - Creating your own Clients
 
