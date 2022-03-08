@@ -6,7 +6,7 @@ from sensor_msgs.msg import BatteryState
 class BatterySubscriber(Node):
 
     def __init__(self):
-        super().__init__('batter_subscriber')
+        super().__init__('battery_subscriber')
         self.subscription = self.create_subscription(
             BatteryState,'/battery_state',self.listener_callback,qos_profile_sensor_data)        
         self.subscription  # prevent unused variable warning
@@ -18,16 +18,16 @@ class BatterySubscriber(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    batter_subscriber = BatterySubscriber()
+    battery_subscriber = BatterySubscriber()
     try: 
-        rclpy.spin(batter_subscriber)
+        rclpy.spin(battery_subscriber)
     except KeyboardInterrupt:
         print('Caught keyboard interrupt')
     except BaseException:
         print('Exception:', file=sys.stderr)
     finally:
         print("done")
-        batter_subscriber.destroy_node()
+        battery_subscriber.destroy_node()
         rclpy.shutdown()
 
 if __name__ == '__main__':
