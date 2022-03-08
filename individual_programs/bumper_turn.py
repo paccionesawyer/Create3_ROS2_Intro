@@ -39,10 +39,10 @@ class BumperTurn(Node):
     def __init__(self):
         super().__init__('bumper_turn')
         self.cp = ColorPalette()
-        self.lights_publisher = self.create_publisher(LightringLeds, '/pacman/cmd_lightring', 10)
+        self.lights_publisher = self.create_publisher(LightringLeds, '/cmd_lightring', 10)
         self.subscription = self.create_subscription(
-            HazardDetectionVector,'/pacman/hazard_detection',self.listener_callback,qos_profile_sensor_data)        
-        self._action_client = ActionClient(self, RotateAngle, '/pacman/rotate_angle')
+            HazardDetectionVector,'/hazard_detection',self.listener_callback,qos_profile_sensor_data)        
+        self._action_client = ActionClient(self, RotateAngle, '/rotate_angle')
 
     def listener_callback(self, msg):
         for detection in msg.detections:

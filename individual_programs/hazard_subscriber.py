@@ -7,7 +7,7 @@ class HazardSubscriber(Node):
     def __init__(self):
         super().__init__('hazard_subscriber')
         self.subscription = self.create_subscription(
-            HazardDetectionVector,'/pacman/hazard_detection',self.listener_callback,qos_profile_sensor_data)        
+            HazardDetectionVector,'/hazard_detection',self.listener_callback,qos_profile_sensor_data)        
         self.subscription  # prevent unused variable warning
 
     def listener_callback(self, msg):
