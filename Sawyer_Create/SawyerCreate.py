@@ -146,7 +146,7 @@ def main():
     myCreate.change_leds(color)
 
     print("Undocking Create3")
-    myCreate.undock()  # This is blocking until the undocking action is complete
+    myCreate.undock()  
 
     print("Driving 0.5")
     myCreate.drive_dist()  # Blocking
