@@ -11,7 +11,7 @@ class DockServoActionClient(Node):
         super().__init__('dockservo_action_client')
         self._action_client = ActionClient(self, DockServo, 'dock')
 
-    def send_goal(self, order):
+    def send_goal(self):
         goal_msg = DockServo.Goal()
         print(goal_msg)
 
@@ -24,7 +24,7 @@ class DockServoActionClient(Node):
     def goal_response_callback(self, future):
         goal_handle = future.result()
         if not goal_handle.accepted:
-            self.get_logger().info('Goal rejected :(')
+            self.get_logger().info('Goal rejected :( Check to see if your Create3 is currently docked')
             return
 
         self.get_logger().info('Goal accepted :)')
@@ -42,9 +42,7 @@ def main(args=None):
     rclpy.init(args=args)
 
     action_client = DockServoActionClient()
-
-    action_client.send_goal("{}")
-
+    action_client.send_goal()
     rclpy.spin(action_client)
 
 

@@ -6,12 +6,18 @@ from irobot_create_msgs.action import Undock
 
 
 class UndockingActionClient(Node):
+    '''
+    Purpose
+    -------
+    A simple action client to communicate to the /undock action, this will
+    only work if the Create3 is currently docked.
+    '''
 
     def __init__(self):
         super().__init__('undocking_action_client')
         self._action_client = ActionClient(self, Undock, 'undock')
 
-    def send_goal(self, order):
+    def send_goal(self):
         goal_msg = Undock.Goal()
         print(goal_msg)
 
@@ -24,7 +30,7 @@ class UndockingActionClient(Node):
     def goal_response_callback(self, future):
         goal_handle = future.result()
         if not goal_handle.accepted:
-            self.get_logger().info('Goal rejected :(')
+            self.get_logger().info('Goal rejected :( Check that the Create3 is currently docked')
             return
 
         self.get_logger().info('Goal accepted :)')
@@ -43,7 +49,7 @@ def main(args=None):
 
     action_client = UndockingActionClient()
 
-    action_client.send_goal("{}")
+    action_client.send_goal()
 
     rclpy.spin(action_client)
 
