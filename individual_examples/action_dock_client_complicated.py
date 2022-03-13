@@ -4,8 +4,7 @@ from rclpy.node import Node
 
 from irobot_create_msgs.action import DockServo
 
-
-class DockServoActionClient(Node):
+class DockServoActionClient2(Node):
 
     def __init__(self):
         super().__init__('dockservo_action_client')
@@ -42,7 +41,7 @@ class DockServoActionClient(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    action_client = DockServoActionClient()
+    action_client = DockServoActionClient2()
     future = action_client.send_goal("{}")
     rclpy.spin_until_future_complete(action_client, future)
 

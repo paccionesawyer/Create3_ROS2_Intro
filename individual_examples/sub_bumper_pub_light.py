@@ -6,10 +6,6 @@ from irobot_create_msgs.msg import HazardDetectionVector
 from irobot_create_msgs.msg import LedColor
 from irobot_create_msgs.msg import LightringLeds
 
-"""
-TODO CHANGE THE TOPIC NAMES TO MATCH NAMESPACE
-"""
-
 class ColorPalette():
     """ Helper Class to define frequently used colors"""
     def __init__(self):
@@ -24,17 +20,6 @@ class ColorPalette():
         self.grey = LedColor(red=189,green=189,blue=189)
         self.tufts_blue = LedColor(red=98,green=166,blue=10)
         self.tufts_brown = LedColor(red=94,green=75,blue=60)
-
-class Lights():
-    """ Class to tell the robot to set lightring lights as part of dance sequence"""
-    def __init__(self, led_colors):
-        """
-        Parameters
-        ----------
-        led_colors : list of LedColor
-            The list of 6 LedColors corresponding to the 6 LED lights on the lightring
-        """
-        self.led_colors = led_colors
 
 class BumperLightChange(Node):
 
@@ -54,17 +39,17 @@ class BumperLightChange(Node):
             if det != "base_link":
                 print(det)
                 if det == "bump_right":
-                    light_list = Lights([self.cp.blue, self.cp.blue, self.cp.blue, self.cp.blue, self.cp.blue, self.cp.blue]) ## NOTE EDIT THIS LINE (Can get ride of Lights Object definition?)
+                    light_list = [self.cp.blue, self.cp.blue, self.cp.blue, self.cp.blue, self.cp.blue, self.cp.blue] 
                 elif det == "bump_left":
-                    light_list = Lights([self.cp.red, self.cp.red, self.cp.red, self.cp.red, self.cp.red, self.cp.red]) ## NOTE EDIT THIS LINE (Can get ride of Lights Object definition?)
+                    light_list = [self.cp.red, self.cp.red, self.cp.red, self.cp.red, self.cp.red, self.cp.red]
                 elif det == "bump_front_left":
-                    light_list = Lights([self.cp.pink, self.cp.pink, self.cp.pink, self.cp.pink, self.cp.pink, self.cp.pink]) ## NOTE EDIT THIS LINE (Can get ride of Lights Object definition?)
+                    light_list = [self.cp.pink, self.cp.pink, self.cp.pink, self.cp.pink, self.cp.pink, self.cp.pink]
                 elif det == "bump_front_right":
-                    light_list = Lights([self.cp.cyan, self.cp.cyan, self.cp.cyan, self.cp.cyan, self.cp.cyan, self.cp.cyan]) ## NOTE EDIT THIS LINE (Can get ride of Lights Object definition?)
+                    light_list = [self.cp.cyan, self.cp.cyan, self.cp.cyan, self.cp.cyan, self.cp.cyan, self.cp.cyan]
                 elif det == "bump_front_center":
-                    light_list = Lights([self.cp.white, self.cp.white, self.cp.white, self.cp.white, self.cp.white, self.cp.white]) ## NOTE EDIT THIS LINE (Can get ride of Lights Object definition?)
+                    light_list = [self.cp.white, self.cp.white, self.cp.white, self.cp.white, self.cp.white, self.cp.white]
 
-                lightring.leds = light_list.led_colors
+                lightring.leds = light_list
                 self.lights_publisher.publish(lightring)
             # self.get_logger().info('I heard: "%s"' % msg)
 

@@ -6,7 +6,7 @@ from irobot_create_msgs.action import Undock
 
 # TODO Simplify this code (i.e. less callback functions and no future)
 
-class UndockingActionClient(Node):
+class UndockingActionClient2(Node):
 
     def __init__(self):
         super().__init__('undocking_action_client')
@@ -46,7 +46,7 @@ class UndockingActionClient(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    action_client = UndockingActionClient()
+    action_client = UndockingActionClient2()
     future = action_client.send_goal("{}")
     rclpy.spin_until_future_complete(action_client, future)
 
