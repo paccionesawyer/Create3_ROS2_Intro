@@ -64,9 +64,6 @@ class BatteryPercentageLED(Node):
         Whenever our subscriber (listener) get's a message this function is 
         'called back' to and ran.
         '''
-
-        # Uncomment this line to see the full message recieved /from
-        # battery_state
         # self.get_logger().info('I heard: "%s"' % msg)
         self.changeLED(msg.percentage)
 
@@ -105,8 +102,10 @@ class BatteryPercentageLED(Node):
                           self.cp.green, self.cp.green, self.cp.green]
 
         current_time = self.get_clock().now()
+
         self.lightring.header.stamp = current_time.to_msg()
         self.lightring.leds = to_publish
+
         self.lights_publisher.publish(self.lightring)
 
     def reset(self):
@@ -115,11 +114,12 @@ class BatteryPercentageLED(Node):
         -------
         Release control of the LEDs back to the Create3.
         '''
-
-        self.lightring.override_system = False
         white = [self.cp.white, self.cp.white, self.cp.white,
                  self.cp.white, self.cp.white, self.cp.white]
+
         self.lightring.leds = white
+        self.lightring.override_system = False
+        
         self.lights_publisher.publish(self.lightring)
 
 
@@ -132,8 +132,6 @@ def main(args=None):
         rclpy.spin(battery_percentage_LED)
     except KeyboardInterrupt:
         print('\nCaught Keyboard Interrupt')
-    except BaseException:
-        print('Exception:', file=sys.stderr)
     finally:
         print("Done")
         battery_percentage_LED.reset()
