@@ -7,28 +7,39 @@ from sensor_msgs.msg import BatteryState
 
 class BatterySubscriber(Node):
     '''
+    An example of subscribing to a ROS2 topic.
     A Node listening to the /battery_state topic.
     '''
 
     def __init__(self, namespace: str = ""):
+        '''
+        Purpose
+        -------
+        initialized by calling the Node constructor, naming our node 
+        'battery_subscriber'
+        '''
         super().__init__('battery_subscriber')
         self.subscription = self.create_subscription(
             BatteryState, namespace + '/battery_state', self.listener_callback,
             qos_profile_sensor_data)
 
     def listener_callback(self, msg: BatteryState):
-        """
-        :type msg: BatteryState
-        :rtype: None
-        """
+        '''
+        Purpose
+        -------
+        Whenever our subscriber (listener) get's a message this function is 
+        'called back' to and ran.
+        '''
         self.get_logger().info('I heard: "%s"' % msg)
         self.printBattery(msg)
 
     def printBattery(self, msg):
-        """
+        '''
         :type msg: BatteryState
         :rtype: None
-        """
+
+        An example of how to get components of the msg returned from a topic.
+        '''
         # We can get components of the message by using the '.' dot operator
         print("Battery Percentage:", msg.percentage)
 
@@ -40,11 +51,9 @@ def main(args=None):
     try:
         rclpy.spin(battery_subscriber)
     except KeyboardInterrupt:
-        print('Caught keyboard interrupt')
-    except BaseException:
-        print('Exception:', file=sys.stderr)
+        print('\nCaught keyboard interrupt')
     finally:
-        print("done")
+        print("Done")
         battery_subscriber.destroy_node()
         rclpy.shutdown()
 
