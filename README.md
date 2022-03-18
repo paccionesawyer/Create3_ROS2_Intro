@@ -9,16 +9,16 @@ As this is primarily used as a jupyter notebook it requires a desktop, and there
 ### Table Of Contents
 
 1. [Getting Data From the Robot (Subscriptions)](#01-getting-data)
-2. [Sending Data To the Robot (Publishing)](./02_Sending_Data.ipynb)
-3. [Sending Actions to the Robot (Actions)](./03_Sending_Actions.ipynb)
-4. [Combining Subscriptions and Publishing](./04_Combining_Sub_and_Pub.ipynb)
-5. [Combining Subscriptions and Actions](./05_Combine_Sub_Actions.ipynb)
-6. [Combining Subscriptions, Publishing, and Actions](./06_Combining_Sub_Pub_and_Actions.ipynb)
-7. [Writing Your Own Code](./07_Writing_New_Code.ipynb)
+2. [Sending Data To the Robot (Publishing)](#02-Sending-Data)
+3. [Sending Actions to the Robot (Actions)](#03-Sending-Actions)
+4. [Combining Subscriptions and Publishing](#04-Combining-Sub-and-Pub)
+5. [Combining Subscriptions and Actions](#05-Combine-Sub-Actions)
+6. [Combining Subscriptions, Publishing, and Actions](#06-Combining-Sub-Pub-and-Actions)
+7. [Writing Your Own Code](#07-Writing-New-Code)
 
 ### Purpose
 
-This notebook is designed to serve as a brief introduction to ROS2. For more information on ROS2 please check out the last page of this notebook [Writing Your Own Code](./07_Writing_New_Code.ipynb). This page gives a broader description of ROS2, how to write your own code, and links to further tutorials.
+This notebook is designed to serve as a brief introduction to ROS2. For more information on ROS2 please check out the last page of this notebook [Writing Your Own Code](#07_Writing_New_Code). This page gives a broader description of ROS2, how to write your own code, and links to further tutorials.
 
 ### [ROS 2](https://docs.ros.org/en/galactic/index.html)
 
