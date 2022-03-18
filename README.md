@@ -9,7 +9,7 @@ As this is primarily used as a jupyter notebook it requires a desktop, and there
 ### Table Of Contents
 
 1. [Getting Data From the Robot (Subscriptions)](./01_Getting_Data.ipynb)
-2. [Sending Data To the Robot (Publishing)](./02_Sending_Data.ipynb)
+2. [Sending Data To the Robot (Publishing)](./#01-getting-data)
 3. [Sending Actions to the Robot (Actions)](./03_Sending_Actions.ipynb)
 4. [Combining Subscriptions and Publishing](./04_Combining_Sub_and_Pub.ipynb)
 5. [Combining Subscriptions and Actions](./05_Combine_Sub_Actions.ipynb)
@@ -33,7 +33,7 @@ In ROS2, we get information from a Robot by subscribing to a topic. For this top
 To do this from the command-line, we use the command `ros2 topic echo <topic_name>`. For example, let's get information from the topic named /battery_state.
 
 ```bash
-    ros2 topic echo /battery_state
+ros2 topic echo /battery_state
 ```
 
 From this message you should have a print-out of battery information corresponding to your Create3.
