@@ -8,8 +8,8 @@ As this is primarily used as a jupyter notebook it requires a desktop, and there
 
 ### Table Of Contents
 
-1. [Getting Data From the Robot (Subscriptions)](./01_Getting_Data.ipynb)
-2. [Sending Data To the Robot (Publishing)](./#01-getting-data)
+1. [Getting Data From the Robot (Subscriptions)](#01-getting-data)
+2. [Sending Data To the Robot (Publishing)](./02_Sending_Data.ipynb)
 3. [Sending Actions to the Robot (Actions)](./03_Sending_Actions.ipynb)
 4. [Combining Subscriptions and Publishing](./04_Combining_Sub_and_Pub.ipynb)
 5. [Combining Subscriptions and Actions](./05_Combine_Sub_Actions.ipynb)
