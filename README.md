@@ -1,128 +1,51 @@
-# Create3 Ros2 Introduction
+# Create3 ROS2 Introduction
 
-## Section 1 - Coding Using Blockly
+This repository has a Jupyter Notebook that is designed to serve as a brief introduction to ROS2. For more information on ROS2 please check out the [official website](https://docs.ros.org/en/galactic/index.html). This page gives a broader description of ROS2, how to write your own code, and links to further tutorials.
 
-iRobot Coding teaches key skills by separating learning to code into 3 developmental Learning Levels. The first uses drag-and-drop, graphical blocks to teach the fundamental logic skills of coding, no reading skills required. When you're ready, use the platform's auto-level converter to instantly translate your code to the next level and create a framework of knowledge you can build upon. [Learn More](https://edu.irobot.com/what-we-offer/irobot-coding)
+As this is primarily used as a jupyter notebook it requires a desktop, and therefore a monitor, keyboard and mouse. However, there is an alternative for those who want to avoid doing that. Below is a set of instructions that follows the jupyter notebook exactly, and replaces every code that is run with a python file call.
 
-[Click Here to Begin Coding!](https://code.irobot.com/#/)
+## 00 Create3 ROS2 Introduction
 
-This setup uses bluetooth to communicate directly from your computer to your Create3, so little to no setup is required. Once on the homepage, there are a ton of great examples, click around. The goal in this section should be to undock your robot, spin around and then dock again. If you're struggling the link below will bring you to a solution.
+### Table Of Contents
 
-[Example Code](https://code.irobot.com/?project=D5TJU)
+1. [Getting Data From the Robot (Subscriptions)](./01_Getting_Data.ipynb)
+2. [Sending Data To the Robot (Publishing)](./02_Sending_Data.ipynb)
+3. [Sending Actions to the Robot (Actions)](./03_Sending_Actions.ipynb)
+4. [Combining Subscriptions and Publishing](./04_Combining_Sub_and_Pub.ipynb)
+5. [Combining Subscriptions and Actions](./05_Combine_Sub_Actions.ipynb)
+6. [Combining Subscriptions, Publishing, and Actions](./06_Combining_Sub_Pub_and_Actions.ipynb)
+7. [Writing Your Own Code](./07_Writing_New_Code.ipynb)
 
-## Section 2 - Coding In Python
+### Purpose
 
-Build upon existing knowledge by connecting new information back to past projects. The ability to flip between learning levels helps you build your way up to Learning Level 3, which uses full-text code to teach the structure and syntax of professional coding languages. [Source](https://edu.irobot.com/what-we-offer/irobot-coding)
+This notebook is designed to serve as a brief introduction to ROS2. For more information on ROS2 please check out the last page of this notebook [Writing Your Own Code](./07_Writing_New_Code.ipynb). This page gives a broader description of ROS2, how to write your own code, and links to further tutorials.
 
-## Section 3 - Coding with ROS2 Command Line
+### [ROS 2](https://docs.ros.org/en/galactic/index.html)
 
-Now that you have begun coding you're robot we can switch to ROS 2. [This is a link to the current documentation for the Create3](https://iroboteducation.github.io/create3_docs/setup/pi4/). Navigate to the Setup tab and follow the instructions there, they also have a tutorial for setting up on a Raspberry Pi.
+### More Examples
 
-### Tufts Wifi
+This jupyter notebook is part of a larger [repository](https://github.com/paccionesawyer/Create3_Python). More examples are found in the subfolder, [`individual_examples`](./individual_examples).
 
-If you are on Tufts WiFi, or any network that does not support multi-casting, there are a couple extra steps to complete. Only do this once you know ROS2 has been setup correctly.
+## 01 Getting Data
 
-What you need to do is the following:
+In ROS2, we get information from a Robot by subscribing to a topic. For this topic let's get the battery information from the Create3.
 
-1. make sure that `rmw_fastrtps_cpp` is the selected RMW implementation on the robot by selecting it in the webserver configuration tab (more details here [https://iroboteducation.github.io/create3_docs/setup/provision/](https://iroboteducation.github.io/create3_docs/setup/provision/))
-2. make sure that Fast-DDS is installed and it's the selected RMW implementation on your laptop (or Raspberry Pi).
+To do this from the command-line, we use the command `ros2 topic echo <topic_name>`. For example, let's get information from the topic named /battery_state.
 
-```
-sudo apt update && sudo apt install ros-galactic-rmw-fastrtps-cpp
-export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-```
-
-3. Copy this XML configuration file to your laptop (or Raspberry Pi) and replace `ROBOT_IP` with the actual IP of your Create 3 at line 12
-
-```
-<?xml version="1.0" encoding="UTF-8" ?>
-<profiles xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
-   <participant profile_name="unicast_connection" is_default_profile="true">
-       <rtps>
-           <builtin>
-               <metatrafficUnicastLocatorList>
-                   <locator/>
-               </metatrafficUnicastLocatorList>
-               <initialPeersList>
-                   <locator>
-                       <udpv4>
-                           <address>ROBOT_IP</address>
-                       </udpv4>
-                   </locator>
-               </initialPeersList>
-           </builtin>
-       </rtps>
-   </participant>
-</profiles>
+```bash
+    ros2 topic echo /battery_state
 ```
 
-4. Tell ROS where to find this XML file by doing: **Repeat this step on reboot**
+From this message you should have a print-out of battery information corresponding to your Create3.
 
-```
-export FASTRTPS_DEFAULT_PROFILES_FILE=/path/to/the/file
-```
+However, in the command-line this isn't much help to us, so next let's see how to get this information in a python file.
 
-5. Kill the ROS daemon to make sure that discovery information are refreshed (**This step may need to be repeated periodically**)
+### Battery Subscriber Example Code
 
-```
-pkill -9 _ros2_daemon
-```
+The full code can be found in this repository under `./individual_examples/sub_battery.py` and assuming you are in the root of this repository can be run as follows.
 
-6. Try to communicate with the robot!
-
-```
-ros2 topic list
+```bash
+python3 ./individual_examples/sub_battery.py
 ```
 
-**NOTE: if Fast-DDS was not already installed on your laptop, you will also have to rebuild the Create 3 ROS 2 messages [https://github.com/iRobotEducation/irobot_create_msgs](https://github.com/iRobotEducation/irobot_create_msgs)**
-
-Credit To [@alsora](https://github.com/alsora)
-
-Now you can test some ROS2 Commands! Copy and past the following into the command line.
-
-Get the battery state!
-```
-ros2 topic echo /battery_state
-```
-
-Change the LED Color!
-```
-ros2 topic pub /cmd_lightring irobot_create_msgs/msg/LightringLeds "{override_system: true, leds: [{red: 255, green: 0, blue: 0}, {red: 0, green: 255, blue: 0}, {red: 0, green: 0, blue: 255}, {red: 255, green: 255, blue: 0}, {red: 255, green: 0, blue: 255}, {red: 0, green: 255, blue: 255}]}"
-```
-
-Undock your Create3!
-```
-ros2 action send_goal /undock irobot_create_msgs/action/Undock "{}"
-```
-
-Dock your Create3!
-```
-ros2 action send_goal /dock irobot_create_msgs/action/DockServo "{}"
-```
-
-## Section 4 - Coding with ROS2 Custom Library
-
-Clone this Github Repository onto your Pi.
-
-```
-git clone https://github.com/paccionesawyer/Create3_Python.git
-```
-
-I've created a boiler plate file for coding with this library. Edit it with your preferred text editor. For example, nano.
-
-```
-cd Create3_Python
-nano Example_File.py
-```
-
-Start Coding! All the function descriptions can be found in the class definition.
-
-## Section 5 - Creating your own Clients
-
-To perform more complicated actions you will need to create your own client node. In order to do this, take a peak at the `SawyerCreate.py` file and the files under `SawyerCreate/create3_commands`.
-
-<!-- IP Address: 10.245.82.16
-
-Name: ubuntu
-
-Password: iRobot -->
+I would continue the same way for the remaining notebooks.
