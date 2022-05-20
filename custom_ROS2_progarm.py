@@ -8,7 +8,7 @@ from rclpy.node import Node
 
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 class ROS2_program_creator():
