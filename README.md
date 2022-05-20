@@ -24,7 +24,7 @@ pip3 install -r requirements.txt
 Navigate to this repository on your local machine, and start a jupyter notebook. If you are unfamiliar with jupyter notebooks I suggest familiarizing yourself before preceding. [Link](https://docs.jupyter.org/en/latest/start/index.html)
 
 ```bash
-cd Create3_ROS2_Intro
+cd ./Create3_ROS2_Intro/ROS2_Workshop
 jupyter notebook
 ```
 
