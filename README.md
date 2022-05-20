@@ -10,13 +10,17 @@ This repository has a Jupyter Notebook that is designed to serve as a brief intr
 Before completing this installation pleasae see the offical [Create3 Docs](https://iroboteducation.github.io/create3_docs/). As long as you can use ros2 from the command line, continue. Specifically, [Raspberry Pi Setup](https://iroboteducation.github.io/create3_docs/setup/pi4/), and [Connect To Wifi](https://iroboteducation.github.io/create3_docs/setup/provision/).
 
 1. Clone this repository on to your ROS2 capable device:
+
 ```bash
 git clone https://github.com/paccionesawyer/Create3_ROS2_Intro.git
 ```
+
 2. Install the required python package using pip or conda. For pip, use the following command:
+
 ```bash
 pip3 install -r requirements.txt
 ```
+
 3. (Optional) Setup Jupyter Notebook as a server so you can run the notebook remotely. [Example](https://www.digitalocean.com/community/tutorials/how-to-install-run-connect-to-jupyter-notebook-on-remote-server)
 
 ## Usage/Examples
