@@ -1,51 +1,44 @@
-# Create3 ROS2 Introduction
 
-This repository has a Jupyter Notebook that is designed to serve as a brief introduction to ROS2. For more information on ROS2 please check out the [official website](https://docs.ros.org/en/galactic/index.html). This page gives a broader description of ROS2, how to write your own code, and links to further tutorials.
+# iRobot Create3 ROS2 Introduction
 
-As this is primarily used as a jupyter notebook it requires a desktop, and therefore a monitor, keyboard and mouse. However, there is an alternative for those who want to avoid doing that. Below is a set of instructions that follows the jupyter notebook exactly, and replaces every code that is run with a python file call.
+This repository has a Jupyter Notebook that is designed to serve as a brief introduction to ROS2. For more information on ROS2 please check out the official website. The functionality of this notebook relies on you already setting up communication between your computer and the Create3 previously.
 
-## 00 Create3 ROS2 Introduction
+(This is has been tested running on a Raspberry Pi 4, running Ubuntu 20.04.4 LTS, Python 3.8.10, and ROS2 Galactic. Connected to the Create3 via USB0 and WiFi).
 
-### Table Of Contents
+## Installation
 
-1. [Getting Data From the Robot (Subscriptions)](#01-getting-data)
-2. [Sending Data To the Robot (Publishing)](#02-Sending-Data)
-3. [Sending Actions to the Robot (Actions)](#03-Sending-Actions)
-4. [Combining Subscriptions and Publishing](#04-Combining-Sub-and-Pub)
-5. [Combining Subscriptions and Actions](#05-Combine-Sub-Actions)
-6. [Combining Subscriptions, Publishing, and Actions](#06-Combining-Sub-Pub-and-Actions)
-7. [Writing Your Own Code](#07-Writing-New-Code)
+Before completing this installation pleasae see the offical [Create3 Docs](https://iroboteducation.github.io/create3_docs/). As long as you can use ros2 from the command line, continue. Specifically, [Raspberry Pi Setup](https://iroboteducation.github.io/create3_docs/setup/pi4/), and [Connect To Wifi](https://iroboteducation.github.io/create3_docs/setup/provision/).
 
-### Purpose
+1. Clone this repository on to your ROS2 capable device:
+```bash
+git clone https://github.com/paccionesawyer/Create3_ROS2_Intro.git
+```
+2. Install the required python package using pip or conda. For pip, use the following command:
+```bash
+pip3 install -r requirements.txt
+```
+3. (Optional) Setup Jupyter Notebook as a server so you can run the notebook remotely. [Example](https://www.digitalocean.com/community/tutorials/how-to-install-run-connect-to-jupyter-notebook-on-remote-server)
 
-This notebook is designed to serve as a brief introduction to ROS2. For more information on ROS2 please check out the last page of this notebook [Writing Your Own Code](#07_Writing_New_Code). This page gives a broader description of ROS2, how to write your own code, and links to further tutorials.
+## Usage/Examples
 
-### [ROS 2](https://docs.ros.org/en/galactic/index.html)
-
-### More Examples
-
-This jupyter notebook is part of a larger [repository](https://github.com/paccionesawyer/Create3_Python). More examples are found in the subfolder, [`individual_examples`](./individual_examples).
-
-## 01 Getting Data
-
-In ROS2, we get information from a Robot by subscribing to a topic. For this topic let's get the battery information from the Create3.
-
-To do this from the command-line, we use the command `ros2 topic echo <topic_name>`. For example, let's get information from the topic named /battery_state.
+Navigate to this repository on your local machine, and start a jupyter notebook. If you are unfamiliar with jupyter notebooks I suggest familiarizing yourself before preceding. [Link](https://docs.jupyter.org/en/latest/start/index.html)
 
 ```bash
-ros2 topic echo /battery_state
+cd Create3_ROS2_Intro
+jupyter notebook
 ```
 
-From this message you should have a print-out of battery information corresponding to your Create3.
+This should provide a URL that you can then connect to, and navigate through the tutorial. If you followed the optional step of setting up a host server, you can connect to the Jupyter Notebook from any computer on the same system.
 
-However, in the command-line this isn't much help to us, so next let's see how to get this information in a python file.
+### Making Custom Files
 
-### Battery Subscriber Example Code
+Another component of this repository is the program called `custom_ROS2_program.py`. This program should be run from the command line and will prompt users to input topics, and from that information build a skeletal program that the user can then improve on.
 
-The full code can be found in this repository under `./individual_examples/sub_battery.py` and assuming you are in the root of this repository can be run as follows.
+## Authors
 
-```bash
-python3 ./individual_examples/sub_battery.py
-```
+- [@paccionesawyer](https://github.com/paccionesawyer)
 
-I would continue the same way for the remaining notebooks.
+## Acknowledgements
+
+- [Create3 Documentation and Team](https://iroboteducation.github.io/create3_docs/)
+- [Offical ROS2 Tutorials](https://docs.ros.org/en/galactic/Tutorials.html)
